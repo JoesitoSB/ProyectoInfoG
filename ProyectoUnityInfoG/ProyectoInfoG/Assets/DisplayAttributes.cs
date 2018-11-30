@@ -21,6 +21,7 @@ public class DisplayAttributes : MonoBehaviour
     private float startTime;
     private float time;
     public Text velocityText;
+    
 
     // Use this for initialization
     void Start()
