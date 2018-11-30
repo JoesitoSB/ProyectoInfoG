@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DisplayAttributes : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class DisplayAttributes : MonoBehaviour
     private float finalATime;
     private float startATime;
     public Text accelerationText;
+    Rigidbody rb;
 
     // Use this for initialization
     void Start()
@@ -44,6 +46,11 @@ public class DisplayAttributes : MonoBehaviour
         GetDistance();
         GetVelocity();
         GetAcceleration();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
     public void GetGroundPos()
     {
@@ -99,7 +106,7 @@ public class DisplayAttributes : MonoBehaviour
     }
     public void ShowVelocity()
     {
-        velocityText.text = gameObject.GetComponent<Rigidbody>().velocity.y + "km/hr";//Pasar a positivo
+        velocityText.text = "Velocidad: " + velocity + "km/h";
     }
 
     public void GetAcceleretionValues()
