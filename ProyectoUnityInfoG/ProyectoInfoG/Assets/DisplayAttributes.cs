@@ -89,7 +89,7 @@ public class DisplayAttributes : MonoBehaviour
     }
     public void ShowVelocity()
     {
-        velocityText.text = "Velocidad: " + velocity + "km/hr";
+        velocityText.text = gameObject.GetComponent<Rigidbody>().velocity.y + "km/hr";//Pasar a positivo
     }
 }
 
