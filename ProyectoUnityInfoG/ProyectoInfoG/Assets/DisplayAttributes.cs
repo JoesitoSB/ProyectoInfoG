@@ -23,10 +23,19 @@ public class DisplayAttributes : MonoBehaviour
     public Text velocityText;
     
 
+    //Acceleration
+    private float acceleration;
+    private float startAccel;
+    private float finalAccel;
+    private float finalATime;
+    private float startATime;
+    public Text accelerationText;
+
     // Use this for initialization
     void Start()
     {
-        InvokeRepeating("GetVelocityValues", 0.01f, 0.1f);//sirve para llamar la funcion dentro de 0.01 segundos y despues se ejecuta cada 0.1 segundos
+        InvokeRepeating("GetVelocityValues", 0.01f, 0.2f);//sirve para llamar la funcion dentro de 0.01 segundos y despues se ejecuta cada 0.1 segundos
+        InvokeRepeating("GetAcceleretionValues", 0.01f, 0.5f);
     }
 
     // Update is called once per frame
@@ -34,6 +43,7 @@ public class DisplayAttributes : MonoBehaviour
     {
         GetDistance();
         GetVelocity();
+        GetAcceleration();
     }
     public void GetGroundPos()
     {
@@ -90,6 +100,31 @@ public class DisplayAttributes : MonoBehaviour
     public void ShowVelocity()
     {
         velocityText.text = gameObject.GetComponent<Rigidbody>().velocity.y + "km/hr";//Pasar a positivo
+    }
+
+    public void GetAcceleretionValues()
+    {
+        finalAccel = startAccel;
+        startAccel = velocity;
+        finalATime = startATime;
+        startATime = time;
+    }
+    public void GetAcceleration()
+    {
+        acceleration = (finalAccel - startAccel) / (finalATime- startATime);
+        RoundAcceleration();
+        ShowAcceleration();
+    }
+    public void RoundAcceleration()
+    {
+        acceleration = acceleration * 10;
+        acceleration = Mathf.Round(acceleration);
+        acceleration = acceleration / 10;
+        acceleration = acceleration * 3.6f;
+    }
+    public void ShowAcceleration()
+    {
+        accelerationText.text = "Aceleracion: " + acceleration + "M/s";
     }
 }
 
